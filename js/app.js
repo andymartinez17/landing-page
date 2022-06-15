@@ -45,11 +45,29 @@ document.getElementById("navbar__list").innerHTML = ` <li><a class="menu__link a
 <li><a class="menu__link" href="#section4" id="4">Section4</a></li>
 `
 
+window.addEventListener(scroll, function() {
+    let Navbar = document.getElementById('navbar');
+    Navbar.classList.add('navbar-scroll');
+});
+
 let buttons = document.querySelectorAll('a');
 buttons.forEach(button => {
     button.addEventListener('click', function () {
         buttons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');        
+        this.classList.add('active');
+        var selectedId = this.id;
+        var selectedId = "section" + this.id ;
+        var Sections = document.querySelectorAll("section");
+        for(i=0;i<4;i++){
+            Sections[i].classList.remove('active');
+        }
+        document.getElementById(selectedId).classList.add("active");
+       //scrll Sections.classList.add('active');
+        
+       // Sections.remove('active');
+       //document.getElementById(selectedId).classList.add("active");
+        
+                
     });
 });
 
@@ -75,6 +93,39 @@ var scrollTimer = -1;
     function scrollFinished() {
       document.body.style.backgroundColor = "red";
     }
+
+    let btn = document.getElementById("scrollToTop");
+
+function showBtn() {
+    if (document.body.scrollTop >=60 || document.documentElement.scrollTop >=60) {
+        //show btn
+        btn.style.display = "block";
+    } else {
+        //hide btn
+        btn.style.display = "none";
+    }
+}
+btn.addEventListener("click",scrollBtn);
+function scrollBtn() {
+    //scroll to top smoothly
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// let prevScrollPos = window.pageYOffset;
+// let Navbar = document.getElementById('navbar');
+//     setTimeout(() => {
+//         let currentScrollPos = window.pageYOffset;
+//         if(currentScrollPos == prevScrollPos) {
+//             console.log('hidden');
+//             Navbar.classList.add('navbar-scroll');
+//         } else {
+//             console.log('hidden');
+//             Navbar.classList.remove('navbar-scroll');
+//         }
+//     }, 200);
+    //fixed nav
+    
+    
 
 // $(window).on('scroll',function(){
 //     var WindowTop = $(window).scrollTop();
